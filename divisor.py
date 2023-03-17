@@ -14,7 +14,7 @@ from borrador import funtiones
 Aller=0
 FECHA= datetime.today().strftime('%d-%h-%Y')
 Hora=time.strftime("%H:%M:%S")
-fichero = open('H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Reporte/Reporte.txt','a',encoding='utf-8')
+fichero = open('H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Reporte/Reporte.txt','a',encoding='utf-8')
 
 fichero.write("\n\n "+FECHA+"     "+Hora)
 """
@@ -67,7 +67,7 @@ def spl (doc_name, page_num,r):
         
     
         
-os.chdir('H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Transporte/')
+os.chdir('H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Transporte/')
 for file in os.listdir():
     scr=file
     os.rename(scr,"basuraT.pdf")
@@ -86,7 +86,7 @@ for file in os.listdir():
      
     print("Fin")
 
-os.chdir('H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Enertik pdf/')
+os.chdir('H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Enertik pdf/')
 for file in os.listdir():
     scr=file
     os.rename(scr,"basura.pdf")

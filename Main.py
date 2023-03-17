@@ -46,10 +46,10 @@ Hora=time.strftime("%H:%M:%S")
 FECHA= datetime.today().strftime('%Y-%m-%d')
 #Guardamos variables con destinos para eliminar basura y desechos
 try:
-    eliminar='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Enertik pdf/basura.pdf'
-    eliminarT='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Transporte/basuraT.pdf'
-    desechos = 'H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos desechos/basura.pdf'
-    desechosT = 'H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos desechos/basuraT.pdf'
+    eliminar='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Enertik pdf/basura.pdf'
+    eliminarT='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Transporte/basuraT.pdf'
+    desechos = 'H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos desechos/basura.pdf'
+    desechosT = 'H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos desechos/basuraT.pdf'
     shutil.move(eliminar,desechos)
 
     shutil.move(eliminarT,desechosT)
@@ -60,9 +60,9 @@ except:
 
 
 #Ahora revisa la carpeta de escaneos en pdf
-Reporte='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Reporte/Reportes.csv'
+Reporte='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Reporte/Reportes.csv'
 #fichero = open('H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Reporte/Reporte.txt','a',encoding='utf-8')
-os.chdir('H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Enertik pdf/')
+os.chdir('H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Enertik pdf/')
 r=0
 #Recorremos la lsita de archivos en la carpeta especifica y cambiamos los nombres
 k=1
@@ -111,13 +111,13 @@ for file in os.listdir():
             
             jpeg_file=img_file+".jpg"
             page.save(jpeg_file,'JPEG') 
-            Nombre2='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Enertik pdf/'+str(jpeg_file)
-            Nombre='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Enertik pdf/'+str(jpeg_file)
-            NombreA='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Enertik pdf/'+str(dst)
+            Nombre2='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Enertik pdf/'+str(jpeg_file)
+            Nombre='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Enertik pdf/'+str(jpeg_file)
+            NombreA='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Enertik pdf/'+str(dst)
     try:
         #nos desacemos de un archivo ini que se encuentra en la nube
         if(extencion=='.ini'):
-            des="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos desechos/"+str(dst)
+            des="H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos desechos/"+str(dst)
             shutil.move(scr,des)
         else:
             pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
@@ -136,7 +136,7 @@ for file in os.listdir():
             coincidencias =re.findall(patron,text)
             numeroRemito="000([0-9]+)"
             coincidenciaRemito=re.findall(numeroRemito,text)
-            nombreRemito='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Enertik pdf/000'+str(coincidenciaRemito[1])+str(extencion)
+            nombreRemito='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Enertik pdf/000'+str(coincidenciaRemito[1])+str(extencion)
             os.rename(NombreA,nombreRemito)
             for coincidencia in coincidencias:
                 Email.append(coincidencia)
@@ -221,7 +221,7 @@ for file in os.listdir():
                     #Cerrar la conexion SMTP
                     gmail.quit()
                     Email.clear()
-                    enviados = 'H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Enviados/000'+str(coincidenciaRemito[1])+str(extencion)
+                    enviados = 'H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Enviados/000'+str(coincidenciaRemito[1])+str(extencion)
                     shutil.move(nombreRemito,enviados)
                     shutil.move(Nombre,desechos)
                     Repor=[FECHA,Hora,str(coincidenciaRemito[1]),destinatario,'Enertik','Enviado']
@@ -236,9 +236,9 @@ for file in os.listdir():
                     with open(Reporte,'a',newline='')as file:
                         write=csv.writer(file,delimiter=';')
                         write.writerow(Repor)
-                    des="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos desechos/000"+str(coincidenciaRemito[1])+str(extencion)
+                    des="H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos desechos/000"+str(coincidenciaRemito[1])+str(extencion)
                     shutil.move(Nombre,des)
-                    err="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Errores/000"+str(coincidenciaRemito[1])+str(extencion)
+                    err="H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Errores/000"+str(coincidenciaRemito[1])+str(extencion)
                     shutil.move(nombreRemito,err)
                     #*******---------ENVIO DE EMAIL---------------******
 
@@ -302,9 +302,9 @@ for file in os.listdir():
             
                
     except:
-        des="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos desechos/000"+str(coincidenciaRemito[1])+str(extencion)
+        des="H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos desechos/000"+str(coincidenciaRemito[1])+str(extencion)
         shutil.move(Nombre,des)
-        err="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Errores/000"+str(coincidenciaRemito[1])+str(extencion)
+        err="H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Errores/000"+str(coincidenciaRemito[1])+str(extencion)
         e=sys.exc_info()[1]
         print (e)
         print(e.args[0])
@@ -383,7 +383,7 @@ for file in os.listdir():
         time.sleep(5)
         k+=1
 #AHora revisamos la carpeta transporte
-os.chdir('H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Transporte/')
+os.chdir('H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Transporte/')
 r=0
 
 k=1
@@ -430,16 +430,16 @@ for file in os.listdir():
             if l==0:  
                 jpeg_file=img_file+"-"+ str(count)+".jpg"
                 page.save(jpeg_file,'JPEG') 
-                Nombre2='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Transporte/'+str(jpeg_file)
-                Nombre='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Transporte/'+str(jpeg_file)
-                NombreA='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Transporte/'+str(dst)
+                Nombre2='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Transporte/'+str(jpeg_file)
+                Nombre='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Transporte/'+str(jpeg_file)
+                NombreA='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Transporte/'+str(dst)
                 l=1
             else:
                 print("listo el pollo")
         
     try:
         if(extencion=='.ini'):
-            des="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos desechos/"+str(dst)
+            des="H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos desechos/"+str(dst)
             shutil.move(scr,des)
         else:
             pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
@@ -456,7 +456,7 @@ for file in os.listdir():
             patron = r"[a-zA-ZÀ-ÿ0-9\u00f1\u00d1._%+-]+@[a-zÀ-ÿ0-9\u00f1\u00d1.-]+.[a-zA-Z]{2,}"
             coincidencias =re.findall(patron,text)
             coincidenciaRemito=re.findall(numeroRemito,text)
-            nombreRemito='H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Transporte/000'+str(coincidenciaRemito[1])+str(extencion)
+            nombreRemito='H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Transporte/000'+str(coincidenciaRemito[1])+str(extencion)
             os.rename(NombreA,nombreRemito)
             for coincidencia in coincidencias:
                 Email.append(coincidencia)
@@ -542,7 +542,7 @@ for file in os.listdir():
                     #Cerrar la conexion SMTP
                     gmail.quit()
                     Email.clear()
-                    enviados = 'H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Enviados/000'+str(coincidenciaRemito[1])+str(extencion)
+                    enviados = 'H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Enviados/000'+str(coincidenciaRemito[1])+str(extencion)
                     shutil.move(nombreRemito,enviados)
                     shutil.move(Nombre,desechos)
                     Repor=[FECHA,Hora,str(coincidenciaRemito[1]),destinatario,'Transporte','Enviado']
@@ -557,9 +557,9 @@ for file in os.listdir():
                     with open(Reporte,'a',newline='')as file:
                         write=csv.writer(file,delimiter=';')
                         write.writerow(Repor)
-                    des="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos desechos/000"+str(coincidenciaRemito[1])+str(extencion)
+                    des="H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos desechos/000"+str(coincidenciaRemito[1])+str(extencion)
                     shutil.move(Nombre,des)
-                    err="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Errores/000"+str(coincidenciaRemito[1])+str(extencion)
+                    err="H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Errores/000"+str(coincidenciaRemito[1])+str(extencion)
                     shutil.move(nombreRemito,err)
                     #*******---------ENVIO DE EMAIL---------------******
 
@@ -620,7 +620,7 @@ for file in os.listdir():
     except:
         #des="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos desechos/"+str(dst)
         k+=1
-        err="H:/Mi unidad/Escaner_AR/Remitos/2022/Remitos Errores/000"+str(coincidenciaRemito[1])+str(extencion)
+        err="H:/Mi unidad/Escaner_AR/Remitos/2023/Remitos Errores/000"+str(coincidenciaRemito[1])+str(extencion)
         #shutil.move(Nombre,des)
         e=sys.exc_info()[1]
         print (e)
